@@ -1,0 +1,30 @@
+#!/usr/bin/execlineb -S0
+import -D /srv DUMPROOT
+if { mkdir -p ${DUMPROOT} }
+cd $DUMPROOT
+
+getpid pid
+backtick -n tai { s6-clock }
+import -iu pid
+import -iu tai
+define dest ${tai}.${pid}
+
+ifelse -n { mkdir $dest } {
+  fdmove 1 2
+  if { echo failed to mkdir $dest }
+  exit 1
+}
+
+if {
+  pipeline { imagedump $@ }
+  tar xC $dest
+}
+
+# save some space
+foreground {
+  redirfd -w 2 /dev/null
+  rsync -cr --link-dest=${DUMPROOT}/current ${dest}/ ${dest}/
+}
+
+if { ln -s $dest link-$dest }
+s6-rename link-$dest current

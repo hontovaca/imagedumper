@@ -1,0 +1,10 @@
+#!/usr/bin/execlineb -S0
+pipeline {
+  chroot /mnt
+  curl -sS --unix-socket /var/run/docker.sock 0/v1.20/images/json
+}
+ifelse { test $# -gt 0 } {
+  pipeline { jq -c .[] }
+  $@
+}
+jq .[]
