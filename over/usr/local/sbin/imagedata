@@ -1,4 +1,4 @@
-#!/usr/bin/execlineb -S0
+#!/bin/execlineb -S0
 pipeline {
   chroot /mnt
   curl -sS --unix-socket /var/run/docker.sock 0/v1.20/images/json

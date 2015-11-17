@@ -1,4 +1,4 @@
-#!/usr/bin/execlineb -S0
+#!/bin/execlineb -S0
 pipeline { imagedata $@ }
 pipeline { jq "select(.RepoTags[] == \"<none>:<none>\")" }
 xargs docker rmi

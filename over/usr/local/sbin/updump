@@ -1,4 +1,4 @@
-#!/usr/bin/execlineb -S0
+#!/bin/execlineb -S0
 import -D /srv DUMPROOT
 if { mkdir -p ${DUMPROOT} }
 cd $DUMPROOT
