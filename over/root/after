@@ -1,4 +1,0 @@
-#!/bin/execlineb -S0
-if { apk -U add jq nginx rsync }
-if { elglob ix /var/cache/apk/* rm $ix }
-rm $0

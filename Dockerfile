@@ -1,5 +1,5 @@
 FROM vaca/s6
 
 COPY over /
-RUN ["/root/after"]
+RUN ["apk","--no-cache","add","jq","nginx","rsync"]
 VOLUME ["/srv"]
